@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import ImportContentPage from "./ImportContentPage";
 import LearnByHeartPage from "./LearnByHeartPage";
+import QuizPage from "./QuizPage";
 
 function Learning(props) {
   const match = useRouteMatch();
@@ -19,7 +20,13 @@ function Learning(props) {
       <BrowserRouter>
         <ul>
           <li>
+            <Link to={match.path + "/import-content"}>/import-content</Link>
+          </li>
+          <li>
             <Link to={match.path + "/learn-by-heart"}>/learn-by-heart</Link>
+          </li>
+          <li>
+            <Link to={match.path + "/Quiz"}>/Quiz</Link>
           </li>
         </ul>
         <Switch>
@@ -35,6 +42,10 @@ function Learning(props) {
           <Route
             path={match.path + "/learn-by-heart"}
             component={LearnByHeartPage}
+          />
+          <Route
+            path={match.path + "/quiz"}
+            component={QuizPage}
           />
           <Route component={NotFound} />
         </Switch>
