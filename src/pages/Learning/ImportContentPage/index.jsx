@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Button, FormGroup, Input, Label } from "reactstrap";
+import QuestionApi from "api/QuestionApi";
 import {
   Checkbox,
   IconButton,
@@ -13,7 +14,10 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import CommentIcon from "@material-ui/icons/Comment";
-import QuizPage from "../QuizPage";
+import QuizPage from "../QuizPage/index";
+import { Collapse } from "antd";
+
+const { Panel } = Collapse;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +49,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function ImportContentPage(props) {
+  const [paragraph, setParagraph] = useState("");
+  const [question, setQuestion] = useState(null);
+  const [conllapseKey, setConllapseKey] = useState("1");
   const [checked, setChecked] = React.useState([0]);
+
+  function callback(key) {
+    if (key.length < 2) {
+      console.log("0000");
+      setConllapseKey(["0"]);
+    }
+    if (key.length === 2) {
+      console.log(222);
+      setConllapseKey(["1"]);
+    }
+    console.log(key);
+  }
+
+  const handleInputParagraph = (event) => {
+    setParagraph(event.target.value);
+    if (event.key === "Enter") {
+      handleGenerate();
+    }
+  };
+
+  const handleGenerate = async () => {
+    // const response = await QuestionApi.generateQuestions(paragraph);
+    // console.log("response:", response);
+    // setQuestion(response);
+    setConllapseKey("0");
+  };
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -114,24 +147,40 @@ function ImportContentPage(props) {
           </Paper>
         </Grid>
         <Grid item xs={8}>
-          {/* <Paper className={classes.paper}>
-            {" "}
-            <FormGroup>
-              <Label for="exampleText">Input Content to learn</Label>
-              <Input
-                className={classes.areaMinHeight}
-                type="textarea"
-                name="text"
-                id="exampleText"
-              />
-            </FormGroup>
-            <div className="d-flex">
-              <Button outline color="danger" size="sm" className="ml-auto">
-                Make Quiz &rarr;
-              </Button>
-            </div>
-          </Paper> */}
-          <QuizPage/>
+          <Collapse
+            activeKey={conllapseKey}
+            destroyInactivePanel={true}
+            onChange={callback}
+           
+          >
+            <Panel header="Input paragaph to learn" key="1">
+              <div>
+                <FormGroup>
+                  {/* <Label for="exampleText">Input Content to learn</Label> */}
+                  <Input
+                    className={classes.areaMinHeight}
+                    type="textarea"
+                    name="text"
+                    id="exampleText"
+                    onKeyUp={handleInputParagraph}
+                  />
+                </FormGroup>
+                <div className="d-flex">
+                  <Button
+                    outline
+                    color="danger"
+                    size="sm"
+                    className="ml-auto"
+                    onClick={() => handleGenerate()}
+                  >
+                    Make Quiz &rarr;
+                  </Button>
+                </div>
+              </div>
+            </Panel>
+          </Collapse>
+
+          {question && <QuizPage question={question} />}
         </Grid>
       </Grid>
     </div>

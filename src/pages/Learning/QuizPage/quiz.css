@@ -1,16 +1,14 @@
-.checkbox-bg1 {
-    background-color: salmon;
+.checkbox-bg {
+    border-radius: 5px;
+    border: 1px solid #096dd9;
+    cursor: pointer;
+}
 
+.checkbox-bg:hover {
+    background-color: rgb(151, 178, 252);
+   
 }
-.checkbox-bg2 {
-    background-color: darkkhaki;
-}
-.checkbox-bg3 {
-    background-color: lightgreen;
-}
-.checkbox-bg4 {
-    background-color: mediumturquoise;
-}
-.checkbox-quiz{
+
+.checkbox-quiz {
     max-Width: 700px;
 }

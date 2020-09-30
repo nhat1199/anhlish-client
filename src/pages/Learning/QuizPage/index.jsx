@@ -1,15 +1,29 @@
 import React from "react";
-import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import "./quiz.css";
-import Icon, { CheckCircleTwoTone } from "@ant-design/icons";
-function QuizPage(props) {
- 
-  return (
-    <div>
-      
+import PropTypes from "prop-types";
 
-      <h3>Parsing error: Unexpected token Compiled with warnings?</h3>
-       
+QuizPage.prototype = {
+  question: PropTypes.string,
+};
+
+QuizPage.defaultProps = {
+  question: null,
+};
+
+function QuizPage(props) {
+  const question = props.question;
+  return (
+    <div className="w-100">
+      {question.map((value, index) => (
+        <React.Fragment key={index}>
+          <h3>{value.content}</h3>
+          {value.answerList.map((item, index) => (
+            <div className="checkbox-bg p-2 mb-2" key={index}>
+              {item.answer}
+            </div>
+          ))}
+        </React.Fragment>
+      ))}
     </div>
   );
 }
