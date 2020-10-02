@@ -75,7 +75,7 @@ function ImportContentPage(props) {
   const handleGenerate = async () => {
     // const response = await QuestionApi.generateQuestions(paragraph);
 
-    const response = initData;
+    const response = [...initData];
     console.log("response:", response);
 
     setQuestion(response);
