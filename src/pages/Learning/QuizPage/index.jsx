@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./quiz.css";
 import PropTypes from "prop-types";
+import { QuestionCircleFilled } from "@ant-design/icons";
 
 QuizPage.prototype = {
   question: PropTypes.string,
@@ -81,7 +82,7 @@ function QuizPage(props) {
       <div className="w-100">
         {question.map((value, parentIndex) => (
           <React.Fragment key={parentIndex}>
-            <p className="pb-5 pt-3 question">{value.content}</p>
+            <p className="pb-5 pt-3 question"><QuestionCircleFilled style={{ fontSize: '20px'}} />{value.content}</p>
             {listAnswer[parentIndex].done && answerComponent(parentIndex)}
             {!listAnswer[parentIndex].done &&
               value.answerList.map((item, index) => (

@@ -175,7 +175,7 @@ function ImportContentPage(props) {
                     className="ml-auto"
                     onClick={() => handleGenerate()}
                   >
-                    Make Quiz &rarr;
+                    Make Quiz &darr;
                   </Button>
                 </div>
               </div>
