@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { Button, FormGroup, Input, Label } from "reactstrap";
+import { Button, FormGroup, Input } from "reactstrap";
 import QuestionApi from "api/QuestionApi";
+import initData from "./initData";
 import {
   Checkbox,
   IconButton,
@@ -56,11 +57,9 @@ function ImportContentPage(props) {
 
   function callback(key) {
     if (key.length < 2) {
-      console.log("0000");
       setConllapseKey(["0"]);
     }
     if (key.length === 2) {
-      console.log(222);
       setConllapseKey(["1"]);
     }
     console.log(key);
@@ -75,8 +74,11 @@ function ImportContentPage(props) {
 
   const handleGenerate = async () => {
     // const response = await QuestionApi.generateQuestions(paragraph);
-    // console.log("response:", response);
-    // setQuestion(response);
+
+    const response = initData;
+    console.log("response:", response);
+
+    setQuestion(response);
     setConllapseKey("0");
   };
 
@@ -151,7 +153,6 @@ function ImportContentPage(props) {
             activeKey={conllapseKey}
             destroyInactivePanel={true}
             onChange={callback}
-           
           >
             <Panel header="Input paragaph to learn" key="1">
               <div>
@@ -160,6 +161,7 @@ function ImportContentPage(props) {
                   <Input
                     className={classes.areaMinHeight}
                     type="textarea"
+                    defaultValue={paragraph}
                     name="text"
                     id="exampleText"
                     onKeyUp={handleInputParagraph}

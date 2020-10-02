@@ -5,9 +5,31 @@
 }
 
 .checkbox-bg:hover {
-    background-color: rgb(151, 178, 252);
-   
+    background: #096dd9;
+    border-radius: 5px;
+    color: white;
 }
+ 
+
+.wrong-bg {
+    background: #ce5252;
+    border-radius: 5px;
+    color: white;
+    cursor: not-allowed;
+}
+
+.right-bg {
+    border-radius: 5px;
+    color: #82ce5d;
+    cursor: not-allowed;
+    border: 1px solid #82ce5d;
+}
+
+.question {
+    font-size: 18px;
+}
+
+
 
 .checkbox-quiz {
     max-Width: 700px;
