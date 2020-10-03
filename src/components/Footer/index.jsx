@@ -1,44 +1,24 @@
 import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
+import { useStyles } from "./footer.style";
 
-function Copyright() {
+function Copyright(classes) {
   return (
-    <Typography variant="body2" color="textSecondary">
-      {"Copyright © "}
-      <Link to="/home">Anhlish</Link> {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <span className={classes.copyright}>
+      {"© Powered by "}
+      <Link to="/home">Anhlish Team </Link>
+      {"Since"} {new Date().getFullYear()}
+    </span>
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    marginTop: "auto",
-  },
-
-  footer: {
-    minHeight: "50px",
-    textAlign: "center",
-    paddingTop: "10px",
-    backgroundColor: "white",
-  },
-}));
-
-export default function StickyFooter() {
+export default function Footer() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <footer className={classes.footer}>
-        <Copyright />
-      </footer>
+      <i>Learn English easier</i>&nbsp;|&nbsp;
+      {Copyright(classes)}
     </div>
   );
 }

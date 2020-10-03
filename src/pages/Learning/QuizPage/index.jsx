@@ -15,7 +15,7 @@ function QuizPage(props) {
   const [question, setQuestion] = useState(props.question);
   const [listAnswer, setListAnswer] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     setQuestion(props.question);
   }, [props.question]);
@@ -83,12 +83,13 @@ function QuizPage(props) {
   }
   if (!loading) {
     return (
-      <div className="w-100">
+      <div className="w-100 mt-3">
         {question.map((value, parentIndex) => (
-          <React.Fragment key={parentIndex}>
-            <p className="pb-3 pt-5 question">
+          <div className="pb-5" key={parentIndex}>
+            <p className="pb-3 question">
               <b>[{parentIndex + 1}]</b>&nbsp;&nbsp;{value.content}
             </p>
+
             {listAnswer[parentIndex].isDone && answerComponent(parentIndex)}
             {!listAnswer[parentIndex].isDone &&
               value.answerList.map((item, index) => (
@@ -104,7 +105,7 @@ function QuizPage(props) {
                   </div>
                 </React.Fragment>
               ))}
-          </React.Fragment>
+          </div>
         ))}
       </div>
     );

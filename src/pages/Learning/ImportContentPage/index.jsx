@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Button, FormGroup, Input } from "reactstrap";
@@ -18,38 +17,10 @@ import CommentIcon from "@material-ui/icons/Comment";
 import QuizPage from "../QuizPage/index";
 import { Collapse } from "antd";
 import { DeploymentUnitOutlined } from "@ant-design/icons";
+import { useStyles } from "./ImportContent.style";
 
 const { Panel } = Collapse;
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    display: "flex",
-    justifyContent: "center",
-  },
-  paper: {
-    padding: theme.spacing(2),
-    color: "black",
-  },
-  areaMinHeight: {
-    minHeight: "200px",
-  },
-  listNewWord: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  outlineNone: {
-    outline: "none",
-  },
-  flexColumn: {
-    display: "flex",
-    flexFlow: "column",
-  },
-  flexRow: {
-    justifyContent: "spaceAround",
-  },
-}));
 function ImportContentPage(props) {
   const [paragraph, setParagraph] = useState("");
   const [question, setQuestion] = useState(null);
@@ -106,10 +77,15 @@ function ImportContentPage(props) {
               <Checkbox />
               <ListItemText id="1" primary="Select all" />
               {/* <h4>New words list</h4> */}
-              <Button outline color="primary" size="sm" className="ml-auto">
+              <Button
+                outline
+                color="primary"
+                size="sm"
+                className="ml-auto mr-2"
+              >
                 <div className="d-flex align-items-center">
-                  <DeploymentUnitOutlined />&nbsp;
-                  Learn
+                  <DeploymentUnitOutlined />
+                  &nbsp; Learn
                 </div>
               </Button>
             </div>
@@ -161,7 +137,6 @@ function ImportContentPage(props) {
             <Panel header="Input paragaph to learn" key="1">
               <div>
                 <FormGroup>
-                  {/* <Label for="exampleText">Input Content to learn</Label> */}
                   <Input
                     className={classes.areaMinHeight}
                     type="textarea"
