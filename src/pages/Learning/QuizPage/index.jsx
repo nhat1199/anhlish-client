@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./quiz.css";
 import PropTypes from "prop-types";
-import { QuestionCircleFilled } from "@ant-design/icons";
 
 QuizPage.prototype = {
   question: PropTypes.string,
@@ -16,7 +15,7 @@ function QuizPage(props) {
   const [question, setQuestion] = useState(props.question);
   const [listAnswer, setListAnswer] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     setQuestion(props.question);
   }, [props.question]);
@@ -26,7 +25,12 @@ function QuizPage(props) {
       if (question.length > 0) {
         let listTemp = [];
         for (let i = 0; i < question.length; i++) {
-          listTemp.push({ index: i, done: false, result: false, choice: null });
+          listTemp.push({
+            index: i,
+            isDone: false,
+            result: false,
+            choice: null,
+          });
         }
         setListAnswer(listTemp);
         setLoading(false);
@@ -41,7 +45,7 @@ function QuizPage(props) {
     let listTemp = [...listAnswer];
     listTemp[questionNumber] = {
       ...listTemp[questionNumber],
-      done: true,
+      isDone: true,
       result: result,
       choice: choice,
     };
@@ -52,7 +56,10 @@ function QuizPage(props) {
 
   function answerComponent(questionNumber) {
     const choice = listAnswer[questionNumber].choice;
-    if (listAnswer[questionNumber].done && !listAnswer[questionNumber].result) {
+    if (
+      listAnswer[questionNumber].isDone &&
+      !listAnswer[questionNumber].result
+    ) {
       const rightAnswer = question[questionNumber].answerList.find(
         (element) => element.correct === true
       );
@@ -62,10 +69,7 @@ function QuizPage(props) {
           <div className="wrong-bg p-2 mb-2">
             {question[questionNumber].answerList[choice].answer}
           </div>
-          <div>
-            &rarr; Right answer: {rightAnswer.answer} <br/>Chỗ này sửa lại css, Đạt
-            làm !
-          </div>
+          <div>&rarr; Right answer: {rightAnswer.answer}</div>
         </React.Fragment>
       );
     }
@@ -82,9 +86,11 @@ function QuizPage(props) {
       <div className="w-100">
         {question.map((value, parentIndex) => (
           <React.Fragment key={parentIndex}>
-            <p className="pb-5 pt-3 question"><QuestionCircleFilled style={{ fontSize: '20px'}} />{value.content}</p>
-            {listAnswer[parentIndex].done && answerComponent(parentIndex)}
-            {!listAnswer[parentIndex].done &&
+            <p className="pb-3 pt-5 question">
+              <b>[{parentIndex + 1}]</b>&nbsp;&nbsp;{value.content}
+            </p>
+            {listAnswer[parentIndex].isDone && answerComponent(parentIndex)}
+            {!listAnswer[parentIndex].isDone &&
               value.answerList.map((item, index) => (
                 <React.Fragment key={index}>
                   <div

@@ -17,6 +17,7 @@ import {
 import CommentIcon from "@material-ui/icons/Comment";
 import QuizPage from "../QuizPage/index";
 import { Collapse } from "antd";
+import { DeploymentUnitOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
@@ -106,7 +107,10 @@ function ImportContentPage(props) {
               <ListItemText id="1" primary="Select all" />
               {/* <h4>New words list</h4> */}
               <Button outline color="primary" size="sm" className="ml-auto">
-                Learn
+                <div className="d-flex align-items-center">
+                  <DeploymentUnitOutlined />&nbsp;
+                  Learn
+                </div>
               </Button>
             </div>
             <div>
