@@ -6,6 +6,7 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const style = {
   textAlign: "center",
@@ -16,6 +17,9 @@ const handleClick = (event) => {
   console.log("event:", event);
 };
 function Header(props) {
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 374px)' })
+  const itemClasname =  isSmallScreen?"d-flex align-items-center text-dark": "d-flex align-items-center text-white";
+  console.log(itemClasname);
   return (
     <Menu
       onClick={handleClick}
@@ -35,8 +39,9 @@ function Header(props) {
           <Link to="/learning/import-content" className="text-white">Learning</Link>
         </div>
       </Menu.Item>
-      <Menu.Item key="mail">
-        <div className="d-flex align-items-center text-white">
+      <Menu.Item key="about" >
+        <div className={itemClasname}>
+          
           <MailOutlined />
           About AnhLish
         </div>

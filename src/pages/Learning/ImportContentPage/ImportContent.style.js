@@ -28,6 +28,10 @@ const styles = makeStyles((theme) => ({
     flexRow: {
       justifyContent: "spaceAround",
     },
+    listNewWordMobileSize: {
+      width:"100%",
+      margin:"10px",
+    },
   }));
 
   export const useStyles = styles;

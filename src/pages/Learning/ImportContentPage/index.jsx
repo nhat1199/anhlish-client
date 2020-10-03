@@ -18,7 +18,7 @@ import QuizPage from "../QuizPage/index";
 import { Collapse } from "antd";
 import { DeploymentUnitOutlined } from "@ant-design/icons";
 import { useStyles } from "./ImportContent.style";
-
+import { useMediaQuery } from "react-responsive";
 const { Panel } = Collapse;
 
 function ImportContentPage(props) {
@@ -26,6 +26,7 @@ function ImportContentPage(props) {
   const [question, setQuestion] = useState(null);
   const [conllapseKey, setConllapseKey] = useState("1");
   const [checked, setChecked] = React.useState([0]);
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 960px)" });
 
   function callback(key) {
     if (key.length < 2) {
@@ -68,10 +69,10 @@ function ImportContentPage(props) {
   };
 
   const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <Grid container item xs={9} spacing={3}>
-        <Grid item xs={4}>
+
+  function NewWordContent(){
+    return (
+      <Grid item xs={12} md={4}>
           <Paper className={(classes.paper, classes.flexColumn)}>
             <div className="d-flex align-items-center p-1">
               <Checkbox />
@@ -128,7 +129,31 @@ function ImportContentPage(props) {
             </List>
           </Paper>
         </Grid>
-        <Grid item xs={8}>
+    );
+  }
+
+
+  function NewWordList() {
+    if (!isTabletOrMobile) {
+      return (
+        <NewWordContent/>
+      );
+    } else return (
+      <Collapse className={classes.listNewWordMobileSize}>
+        <Panel header="New Word List" >
+        <NewWordContent/>
+        </Panel>
+      </Collapse>
+    );
+  }
+
+
+
+  return (
+    <div className={classes.root}>
+      <Grid container item xs={12} md={12} lg={9} spacing={3}>
+        <NewWordList/>
+        <Grid item xs={12} md={8}>
           <Collapse
             activeKey={conllapseKey}
             destroyInactivePanel={true}
