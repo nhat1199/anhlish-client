@@ -1,53 +1,104 @@
-import React from "react";
-import { Menu } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import { AccountCircle } from '@material-ui/icons';
+import { Menu, MenuItem } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import headerStyles from './header.styles';
+import MenuDialog from './MenuDialog';
 
-const style = {
-  textAlign: "center",
-  backgroundColor: "cornflowerblue",
-  color: "white",
-};
-const handleClick = (event) => {
-  console.log("event:", event);
-};
-function Header(props) {
-  const isSmallScreen = useMediaQuery({ query: '(max-width: 374px)' })
-  const itemClasname =  isSmallScreen?"d-flex align-items-center text-dark": "d-flex align-items-center text-white";
-  console.log(itemClasname);
-  return (
-    <Menu
-      onClick={handleClick}
-      selectedKeys="nav-menu"
-      mode="horizontal"
-      style={style}
-    >
-      <Menu.Item key="home">
-        <div className="d-flex align-items-center text-white">
-          <HomeOutlined />
-          <Link to="/home" className="text-white">Home</Link>
-        </div>
-      </Menu.Item>
-      <Menu.Item key="app">
-        <div className="d-flex align-items-center text-white">
-          <AppstoreOutlined />
-          <Link to="/learning/import-content" className="text-white">Learning</Link>
-        </div>
-      </Menu.Item>
-      <Menu.Item key="about" >
-        <div className={itemClasname}>
-          
-          <MailOutlined />
-          About AnhLish
-        </div>
-      </Menu.Item>
-    </Menu>
-  );
+export default function Header() {
+	const classes = headerStyles();
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const open = Boolean(anchorEl);
+	const handleMenu = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+	return (
+		<div className={classes.root}>
+			<AppBar >
+				<Toolbar>
+					<Typography className={classes.title} variant="h6">
+						LOGO
+					</Typography>
+					<div className={classes.search}>
+						<div className={classes.searchIcon}>
+							<SearchIcon />
+						</div>
+						<InputBase
+							placeholder="Search…"
+							classes={{
+								root: classes.inputRoot,
+								input: classes.inputInput,
+							}}
+							inputProps={{ 'aria-label': 'search' }}
+						/>
+					</div>
+					<div className={classes.itemFixed}>
+						<Link to="/learning/import-content" className="text-white p-3">
+							<b>Reading</b>
+						</Link>
+						<Link to="/learning/import-content" className="text-white p-3">
+							<b>Vocabulary</b>
+						</Link>
+						<Link to="/learning/learn-by-heart" className="text-white p-3">
+							<b>learn-by-heart</b>
+						</Link>
+						<Link to="/home" className="text-white p-3">
+							<b>Home</b>
+						</Link>
+					</div>
+					<div className={classes.itemFixed + ' ml-auto'}>
+						<IconButton
+							aria-label="account of current user"
+							aria-controls="menu-appbar"
+							aria-haspopup="true"
+							onClick={handleMenu}
+							color="inherit"
+						>
+							<AccountCircle />
+						</IconButton>
+						<Menu
+							id="menu-appbar"
+							anchorEl={anchorEl}
+							anchorOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							open={open}
+							onClose={handleClose}
+						>
+							<MenuItem onClick={handleClose}>Profile</MenuItem>
+							<MenuItem onClick={handleClose}>My account</MenuItem>
+						</Menu>
+					</div>
+					<div className={classes.moreIcon}>
+						<IconButton
+							edge="end"
+							className={classes.menuButton}
+							color="inherit"
+							aria-label="open drawer"
+						>
+							<MenuDialog />
+						</IconButton>
+					</div>
+				</Toolbar>
+			</AppBar>
+      <Toolbar/>
+		</div>
+	);
 }
-
-export default Header;

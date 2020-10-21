@@ -3,6 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.css";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from "components/Header";
 import NotFound from "./components/NotFound";
 import Footer from "components/Footer";
@@ -13,6 +14,7 @@ function App() {
   console.log(ROUTER_LINK_LIST);
   return (
     <div className="app">
+		<CssBaseline />
       <Suspense fallback={<h3>Loading...</h3>}>
         <BrowserRouter>
           <Header />
