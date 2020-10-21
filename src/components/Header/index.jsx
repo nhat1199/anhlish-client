@@ -11,7 +11,7 @@ import { Menu, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import headerStyles from './header.styles';
 import MenuDialog from './MenuDialog';
-
+import { learningLink } from 'helper/RouterLink.data';
 export default function Header() {
 	const classes = headerStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,7 +25,7 @@ export default function Header() {
 	};
 	return (
 		<div className={classes.root}>
-			<AppBar >
+			<AppBar>
 				<Toolbar>
 					<Typography className={classes.title} variant="h6">
 						LOGO
@@ -44,14 +44,14 @@ export default function Header() {
 						/>
 					</div>
 					<div className={classes.itemFixed}>
-						<Link to="/learning/import-content" className="text-white p-3">
+						<Link to={learningLink.readingLink} className="text-white p-3">
 							<b>Reading</b>
 						</Link>
-						<Link to="/learning/import-content" className="text-white p-3">
+						<Link to={learningLink.vocabularyLink} className="text-white p-3">
 							<b>Vocabulary</b>
 						</Link>
 						<Link to="/learning/learn-by-heart" className="text-white p-3">
-							<b>learn-by-heart</b>
+							<b>DUMMY</b>
 						</Link>
 						<Link to="/home" className="text-white p-3">
 							<b>Home</b>
@@ -87,18 +87,13 @@ export default function Header() {
 						</Menu>
 					</div>
 					<div className={classes.moreIcon}>
-						<IconButton
-							edge="end"
-							className={classes.menuButton}
-							color="inherit"
-							aria-label="open drawer"
-						>
+						<IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="open drawer">
 							<MenuDialog />
 						</IconButton>
 					</div>
 				</Toolbar>
 			</AppBar>
-      <Toolbar/>
+			<Toolbar />
 		</div>
 	);
 }

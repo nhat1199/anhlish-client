@@ -1,5 +1,5 @@
-import ImportContentPage from "./ImportContentPage";
-import LearnByHeartPage from "./LearnByHeartPage";
+import ReadingPage from "./ReadingPage";
+import VocabularyPage from "./VocabularyPage";
 
 
-export {ImportContentPage, LearnByHeartPage};
+export {ReadingPage, VocabularyPage};

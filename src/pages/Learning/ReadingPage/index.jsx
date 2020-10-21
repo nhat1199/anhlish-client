@@ -17,11 +17,11 @@ import CommentIcon from "@material-ui/icons/Comment";
 import QuizPage from "../QuizPage/index";
 import { Collapse } from "antd";
 import { DeploymentUnitOutlined } from "@ant-design/icons";
-import { useStyles } from "./ImportContent.style";
+import { useStyles } from "./ReadingPage.style";
 import { useMediaQuery } from "react-responsive";
 const { Panel } = Collapse;
 
-function ImportContentPage(props) {
+function ReadingPage(props) {
   const [paragraph, setParagraph] = useState("");
   const [question, setQuestion] = useState(null);
   const [conllapseKey, setConllapseKey] = useState("1");
@@ -193,4 +193,4 @@ function ImportContentPage(props) {
   );
 }
 
-export default ImportContentPage;
+export default ReadingPage;

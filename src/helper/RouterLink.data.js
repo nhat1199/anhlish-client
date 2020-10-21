@@ -1,22 +1,22 @@
 import HomePage from 'pages/HomePage';
-import { ImportContentPage, LearnByHeartPage } from 'pages/Learning/index';
+import { ReadingPage, VocabularyPage } from 'pages/Learning/index';
 const HOME_LINK = '/home';
 const LEARNING_LINK = '/learning';
 
 const learningLink = {
-	ImportContent: LEARNING_LINK + '/import-content',
-	LearnByHeart: LEARNING_LINK + '/learn-by-heart',
+	readingLink: LEARNING_LINK + '/reading',
+	vocabularyLink: LEARNING_LINK + '/vocabulary',
 };
 const learningComponentGroup = [
 	{
-		name: 'Import Content',
-		link: learningLink.ImportContent,
-		component: ImportContentPage,
+		name: 'Reading Page',
+		link: learningLink.readingLink,
+		component: ReadingPage,
 	},
 	{
-		name: 'Learn by heart',
-		link: learningLink.LearnByHeart,
-		component: LearnByHeartPage,
+		name: 'Vocabulary',
+		link: learningLink.vocabularyLink,
+		component: VocabularyPage,
 	},
 ];
 
