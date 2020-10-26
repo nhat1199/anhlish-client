@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import queryString from "query-string";
+// import queryString from "query-string";
 const customerApi = {
   generateQuestions: (paragraph) => {
     const url = "/make-question";

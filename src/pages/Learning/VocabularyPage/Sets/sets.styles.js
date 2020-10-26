@@ -2,6 +2,7 @@ const { makeStyles } = require('@material-ui/core');
 
 const setStyles = makeStyles({
 	root: {
+		marginBottom: '15px',
 		minWidth: 275,
 		cursor: 'pointer',
 		'&:hover': {
