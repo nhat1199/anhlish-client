@@ -1,51 +1,98 @@
-import React from "react";
-import { Menu } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import { AccountCircle } from '@material-ui/icons';
+import { Menu, MenuItem } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import headerStyles from './header.styles';
+import MenuDialog from './MenuDialog';
+import { learningLink } from 'helper/RouterLink.data';
+export default function Header() {
+	const classes = headerStyles();
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const open = Boolean(anchorEl);
+	const handleMenu = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
 
-const { SubMenu } = Menu;
-const style = {
-  textAlign: "center",
-};
-const handleClick = (event) => {
-  console.log("event:", event);
-};
-function Header(props) {
-  return (
-    <Menu
-      onClick={handleClick}
-      selectedKeys="nav-menu"
-      mode="horizontal"
-      style={style}
-    >
-      <Menu.Item key="app" icon={<AppstoreOutlined />}>
-        <Link to="/learning">Learning</Link>
-      </Menu.Item>
-      <Menu.Item key="mail" icon={<MailOutlined />}>
-        About AnhLish
-      </Menu.Item>
-
-      <SubMenu key="SubMenu" icon={<SettingOutlined />} title="Setting">
-        <Menu.ItemGroup title="Item 1">
-          <Menu.Item key="setting:1">Option 1</Menu.Item>
-          <Menu.Item key="setting:2">Option 2</Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.ItemGroup title="Item 2">
-          <Menu.Item key="setting:3">Option 3</Menu.Item>
-          <Menu.Item key="setting:4">Option 4</Menu.Item>
-        </Menu.ItemGroup>
-      </SubMenu>
-      <Menu.Item key="key">
-        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-          Navigation Four - Link
-        </a>
-      </Menu.Item>
-    </Menu>
-  );
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+	return (
+		<div className={classes.root}>
+			<AppBar>
+				<Toolbar>
+					<Typography className={classes.title} variant="h6">
+						LOGO
+					</Typography>
+					<div className={classes.search}>
+						<div className={classes.searchIcon}>
+							<SearchIcon />
+						</div>
+						<InputBase
+							placeholder="Search…"
+							classes={{
+								root: classes.inputRoot,
+								input: classes.inputInput,
+							}}
+							inputProps={{ 'aria-label': 'search' }}
+						/>
+					</div>
+					<div className={classes.itemFixed}>
+						<Link to={learningLink.readingLink} className="text-white p-3">
+							<b>Reading</b>
+						</Link>
+						<Link to={learningLink.vocabularyLink} className="text-white p-3">
+							<b>Vocabulary</b>
+						</Link>
+						<Link to="/learning/learn-by-heart" className="text-white p-3">
+							<b>DUMMY</b>
+						</Link>
+						<Link to="/home" className="text-white p-3">
+							<b>Home</b>
+						</Link>
+					</div>
+					<div className={classes.itemFixed + ' ml-auto'}>
+						<IconButton
+							aria-label="account of current user"
+							aria-controls="menu-appbar"
+							aria-haspopup="true"
+							onClick={handleMenu}
+							color="inherit"
+						>
+							<AccountCircle />
+						</IconButton>
+						<Menu
+							id="menu-appbar"
+							anchorEl={anchorEl}
+							anchorOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							open={open}
+							onClose={handleClose}
+						>
+							<MenuItem onClick={handleClose}>Profile</MenuItem>
+							<MenuItem onClick={handleClose}>My account</MenuItem>
+						</Menu>
+					</div>
+					<div className={classes.moreIcon}>
+						<IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="open drawer">
+							<MenuDialog />
+						</IconButton>
+					</div>
+				</Toolbar>
+			</AppBar>
+			<Toolbar />
+		</div>
+	);
 }
-
-export default Header;
