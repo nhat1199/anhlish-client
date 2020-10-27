@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Button, FormGroup, Input } from "reactstrap";
-import QuestionApi from "api/QuestionApi";
+// import QuestionApi from "api/QuestionApi";
 import initData from "./initData";
 import {
   Checkbox,

@@ -38,6 +38,7 @@ function QuizPage(props) {
     }
     initListAnswer();
     console.log("useEffect 2 run:", listAnswer);
+    // eslint-disable-next-line
   }, [props.question]);
 
   const handleChoice = (questionNumber, result, choice) => {
